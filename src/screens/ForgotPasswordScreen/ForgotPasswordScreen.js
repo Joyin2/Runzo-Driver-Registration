@@ -12,7 +12,7 @@ import {
   import CustomButton from '../../components/CustomButton';
   import SocialSignInButtons from '../../components/SocialSignInButtons';
   
-  const ConfirmEmailScreen = () => {
+  const ForgotPasswordScreen = () => {
     const [code, setCode] = useState('');
   
     const {height} = useWindowDimensions();
@@ -37,7 +37,7 @@ import {
             style={[styles.logo, {height: height * 0.3}]}
             resizeMode="contain"
           />
-          <Text style={styles.title}>Confirm your email</Text>
+          <Text style={styles.title}>Reset your password</Text>
           <CustomInput
             placeholder="Enter your confirmation code"
             value={code}
@@ -92,5 +92,5 @@ import {
     },
   });
   
-  export default ConfirmEmailScreen;
+  export default ForgotPasswordScreen;
   
