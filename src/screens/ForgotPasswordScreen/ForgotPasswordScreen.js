@@ -13,7 +13,7 @@ import {
   import SocialSignInButtons from '../../components/SocialSignInButtons';
   
   const ForgotPasswordScreen = () => {
-    const [code, setCode] = useState('');
+    const [username, setUsername] = useState('');
   
     const {height} = useWindowDimensions();
   
@@ -25,7 +25,7 @@ import {
       console.warn('Sign In page will appear');
     };
   
-    const onResendPress = () => {
+    const onSendPressed = () => {
       console.warn('on terms of use pressed');
     };
   
@@ -39,21 +39,15 @@ import {
           />
           <Text style={styles.title}>Reset your password</Text>
           <CustomInput
-            placeholder="Enter your confirmation code"
-            value={code}
-            setValue={setCode}
+            placeholder="Username"
+            value={username}
+            setValue={setUsername}
           />
   
           <CustomButton
-            text="Confirm"
-            onPress={onConfirmPressed}
+            text="Send"
+            onPress={onSendPressed}
             type="PRIMARY"
-          />
-  
-          <CustomButton
-            text="Resend code"
-            onPress={onResendPress}
-            type="SECONDARY"
           />
   
           <CustomButton
