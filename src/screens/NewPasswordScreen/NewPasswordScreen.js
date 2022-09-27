@@ -13,21 +13,24 @@ import {
   import SocialSignInButtons from '../../components/SocialSignInButtons';
   
   const NewPasswordScreen = () => {
-    const [username, setUsername] = useState('');
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
   
     const {height} = useWindowDimensions();
   
     const onConfirmPressed = () => {
       console.warn('confirm pressed');
     };
+
+    const onSubmitPressed = () => {
+        console.warn('submit');
+      };
   
     const onSignInPress = () => {
       console.warn('Sign In page will appear');
     };
   
-    const onSendPressed = () => {
-      console.warn('on terms of use pressed');
-    };
+   
   
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -39,14 +42,19 @@ import {
           />
           <Text style={styles.title}>Reset your password</Text>
           <CustomInput
-            placeholder="Username"
-            value={username}
-            setValue={setUsername}
+            placeholder="Code"
+            value={code}
+            setValue={setCode}
+          />
+          <CustomInput
+            placeholder="Enter your new password"
+            value={newPassword}
+            setValue={setNewPassword}
           />
   
           <CustomButton
-            text="Send"
-            onPress={onSendPressed}
+            text="Submit"
+            onPress={onSubmitPressed}
             type="PRIMARY"
           />
   

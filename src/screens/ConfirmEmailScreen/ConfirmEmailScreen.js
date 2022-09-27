@@ -21,12 +21,12 @@ const ConfirmEmailScreen = () => {
     console.warn('confirm pressed');
   };
 
-  const onSignInPress = () => {
-    console.warn('Sign In page will appear');
-  };
-
   const onResendPress = () => {
     console.warn('on terms of use pressed');
+  };
+
+  const onSignInPress = () => {
+    console.warn('Sign In page will appear');
   };
 
   return (
