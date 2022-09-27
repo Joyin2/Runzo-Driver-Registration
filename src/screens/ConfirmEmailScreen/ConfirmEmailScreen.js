@@ -11,14 +11,17 @@ import Logo from '../../../assets/images/logo.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
+import { useNavigation } from '@react-navigation/native';
 
 const ConfirmEmailScreen = () => {
   const [code, setCode] = useState('');
 
   const {height} = useWindowDimensions();
 
+  const navigation = useNavigation();
+
   const onConfirmPressed = () => {
-    console.warn('confirm pressed');
+    navigation.navigate('Home');
   };
 
   const onResendPress = () => {
@@ -26,7 +29,7 @@ const ConfirmEmailScreen = () => {
   };
 
   const onSignInPress = () => {
-    console.warn('Sign In page will appear');
+    navigation.navigate('SignIn');
   };
 
   return (
