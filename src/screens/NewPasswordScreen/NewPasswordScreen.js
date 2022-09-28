@@ -11,23 +11,24 @@ import {
   import CustomInput from '../../components/CustomInput';
   import CustomButton from '../../components/CustomButton';
   import SocialSignInButtons from '../../components/SocialSignInButtons';
+  import { useNavigation } from '@react-navigation/native';
   
   const NewPasswordScreen = () => {
     const [code, setCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
   
     const {height} = useWindowDimensions();
+
+    const navigation = useNavigation();
   
-    const onConfirmPressed = () => {
-      console.warn('confirm pressed');
-    };
+  
 
     const onSubmitPressed = () => {
-        console.warn('submit');
+      navigation.navigate('Home');
       };
   
     const onSignInPress = () => {
-      console.warn('Sign In page will appear');
+      navigation.navigate('SignIn');
     };
   
    

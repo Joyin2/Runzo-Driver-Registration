@@ -11,22 +11,23 @@ import {
   import CustomInput from '../../components/CustomInput';
   import CustomButton from '../../components/CustomButton';
   import SocialSignInButtons from '../../components/SocialSignInButtons';
+import { useNavigation } from '@react-navigation/native';
   
   const ForgotPasswordScreen = () => {
     const [username, setUsername] = useState('');
   
     const {height} = useWindowDimensions();
+
+    const navigation = useNavigation();
   
-    const onConfirmPressed = () => {
-      console.warn('confirm pressed');
-    };
+  
   
     const onSignInPress = () => {
-      console.warn('Sign In page will appear');
+      navigation.navigate('SignIn');
     };
   
     const onSendPressed = () => {
-      console.warn('on terms of use pressed');
+      navigation.navigate('NewPassword');
     };
   
     return (
