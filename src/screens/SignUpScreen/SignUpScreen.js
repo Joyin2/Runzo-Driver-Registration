@@ -12,13 +12,15 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import { useNavigation } from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
 
 const SignUpScreen = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [email, setEmail] = useState('');
 
-  const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [passwordRepeat, setPasswordRepeat] = useState('');
+  const {control, handleSubmit} = useForm();
   const {height} = useWindowDimensions();
 
   const navigation = useNavigation();
@@ -74,7 +76,7 @@ const SignUpScreen = () => {
         />
         <CustomButton
           text="Register"
-          onPress={onRegisterPressed}
+          onPress={handleSubmit(onRegisterPressed)}
           type="PRIMARY"
         />
         <Text style={styles.text}>
