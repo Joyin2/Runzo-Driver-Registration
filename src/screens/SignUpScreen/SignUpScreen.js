@@ -11,7 +11,7 @@ import Logo from '../../../assets/images/logo.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 
 const SignUpScreen = () => {
@@ -20,7 +20,8 @@ const SignUpScreen = () => {
 
   // const [password, setPassword] = useState('');
   // const [passwordRepeat, setPasswordRepeat] = useState('');
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, watch} = useForm();
+  const pwd = watch('password');
   const {height} = useWindowDimensions();
 
   const navigation = useNavigation();
@@ -29,18 +30,15 @@ const SignUpScreen = () => {
     navigation.navigate('ConfirmEmail');
   };
 
-
   const onSignInPress = () => {
     navigation.navigate('SignIn');
   };
-  const onTermsOfUsePressed = ()=>{
+  const onTermsOfUsePressed = () => {
     console.warn('on terms of use pressed');
   };
-  const onPrivacyPressed = ()=>{
+  const onPrivacyPressed = () => {
     console.warn('on Privacy pressed');
   };
-
-
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -52,27 +50,49 @@ const SignUpScreen = () => {
         />
         <Text style={styles.title}>Create an account </Text>
         <CustomInput
+          name="username"
+          control={control}
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
+          rules={{
+            required: 'Username is required',
+            minLength: {
+              value: 5,
+              message: 'Username should be atleast 6 characters long',
+            },
+            maxLength: {
+              value: 24,
+              message: 'Username should be maximum 24 characters long',
+            },
+          }}
         />
         <CustomInput
+          name="email"
+          control={control}
           placeholder="Email"
-          value={email}
-          setValue={setEmail}
           keyboardType="email-address"
+          rules={{required: 'Email is required'}}
         />
         <CustomInput
+          name="password"
+          control={control}
           placeholder="Password"
-          value={password}
-          setValue={setPassword}
           secureTextEntry={true}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 8,
+              message: 'Password should be atleast 8 characters long',
+            },
+          }}
         />
         <CustomInput
+          name="password-repeat"
+          control={control}
           placeholder="Confirm Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat}
           secureTextEntry={true}
+          rules={{
+            validate: value => value === pwd || 'password do not match',
+          }}
         />
         <CustomButton
           text="Register"
@@ -81,10 +101,16 @@ const SignUpScreen = () => {
         />
         <Text style={styles.text}>
           By registering, you confirm that you accept our{' '}
-          <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use{' '}</Text> and{' '}
-          <Text style={styles.link} onPress={onPrivacyPressed}>{' '}Privacy Policy</Text>
+          <Text style={styles.link} onPress={onTermsOfUsePressed}>
+            Terms of Use{' '}
+          </Text>{' '}
+          and{' '}
+          <Text style={styles.link} onPress={onPrivacyPressed}>
+            {' '}
+            Privacy Policy
+          </Text>
         </Text>
-       <SocialSignInButtons/>
+        <SocialSignInButtons />
         <CustomButton
           text="Have an account? Sign In"
           onPress={onSignInPress}
@@ -112,13 +138,13 @@ const styles = StyleSheet.create({
     color: '#051C60',
     margin: 10,
   },
-  text:{
+  text: {
     color: 'gray',
     marginVertical: 10,
   },
-  link:{
-    color:"#FDB075"
-  }
+  link: {
+    color: '#FDB075',
+  },
 });
 
 export default SignUpScreen;
