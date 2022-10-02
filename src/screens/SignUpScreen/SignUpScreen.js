@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/logo.png';
@@ -13,6 +14,7 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const SignUpScreen = () => {
   // const [username, setUsername] = useState('');
@@ -26,8 +28,20 @@ const SignUpScreen = () => {
 
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail');
+  const onRegisterPressed = async(data) => {
+    const {username, password, email, name} = data
+    try {
+      await Auth.signUp({ 
+        username,
+        password,
+        attributes: {email, name, preferred_username: username},
+      });
+      navigation.navigate('ConfirmEmail', {username});
+    } catch (e) {
+      Alert.alert('Oops', e.message);
+    }
+
+    // navigation.navigate('ConfirmEmail');
   };
 
   const onSignInPress = () => {
@@ -49,6 +63,22 @@ const SignUpScreen = () => {
           resizeMode="contain"
         />
         <Text style={styles.title}>Create an account </Text>
+        <CustomInput
+          name="name"
+          control={control}
+          placeholder="Name"
+          rules={{
+            required: 'name is required',
+            // minLength: {
+            //   value: 1,
+            //   message: 'name should be atleast 1 characters long',
+            // },
+            maxLength: {
+              value: 80,
+              message: 'name should be maximum 24 characters long',
+            },
+          }}
+        />
         <CustomInput
           name="username"
           control={control}

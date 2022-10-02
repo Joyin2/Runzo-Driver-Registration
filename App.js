@@ -22,7 +22,10 @@ import Amplify from 'aws-amplify';
 import config from './src/aws-exports';
 
 
+Amplify.configure(config);
+
 const App = () => {
+  // Auth.signOut();
   return (
     <View style={styles.root}>
       <Navigation />
@@ -36,5 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FBFC',
   },
 });
+
+
 
 export default App;

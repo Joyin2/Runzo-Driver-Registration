@@ -11,17 +11,21 @@ import Logo from '../../../assets/images/logo.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import {useRoute} from '@react-navigation/native';
 
 const ConfirmEmailScreen = () => {
-  const {control, handleSubmit} = useForm();
+  const route = useRoute();
+  const {control, handleSubmit} = useForm({
+    defaultValues: {username: route?. param?. username},
+  });
 
   const {height} = useWindowDimensions();
 
   const navigation = useNavigation();
 
-  const onConfirmPressed = (data) => {
+  const onConfirmPressed = data => {
     console.warn(data);
     navigation.navigate('Home');
   };
@@ -43,6 +47,16 @@ const ConfirmEmailScreen = () => {
           resizeMode="contain"
         />
         <Text style={styles.title}>Confirm your email</Text>
+
+        <CustomInput
+          name="username"
+          control={control}
+          placeholder="Username"
+          rules={{
+            required: 'Username is required',
+          }}
+        />
+
         <CustomInput
           name="code"
           control={control}
