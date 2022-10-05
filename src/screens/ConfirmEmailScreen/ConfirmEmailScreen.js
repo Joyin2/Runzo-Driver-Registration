@@ -13,7 +13,7 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import {useRoute} from '@react-navigation/native';
+
 
 const ConfirmEmailScreen = () => {
   const route = useRoute();
