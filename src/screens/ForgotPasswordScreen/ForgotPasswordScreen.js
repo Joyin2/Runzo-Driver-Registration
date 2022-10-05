@@ -14,23 +14,23 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const ForgotPasswordScreen = () => {
   const {control, handleSubmit} = useForm();
   const [username, setUsername] = useState('');
-
   const {height} = useWindowDimensions();
-
   const navigation = useNavigation();
-
-  const onSignInPress = () => {
-    navigation.navigate('SignIn');
-  };
 
   const onSendPressed = data => {
     console.warn(data);
     navigation.navigate('NewPassword');
   };
+
+  const onSignInPress = () => {
+    navigation.navigate('SignIn');
+  };
+
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
