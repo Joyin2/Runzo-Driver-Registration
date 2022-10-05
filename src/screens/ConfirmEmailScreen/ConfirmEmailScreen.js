@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert
 } from 'react-native';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/logo.png';
@@ -13,25 +14,37 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 
 const ConfirmEmailScreen = () => {
   const route = useRoute();
-  const {control, handleSubmit} = useForm({
-    defaultValues: {username: route?. param?. username},
+  const {control, handleSubmit, watch} = useForm({
+    defaultValues: {username: route?. params?. username},
   });
+
+  const username = watch('username')
 
   const {height} = useWindowDimensions();
 
   const navigation = useNavigation();
 
-  const onConfirmPressed = data => {
-    console.warn(data);
-    navigation.navigate('Home');
+  const onConfirmPressed = async data => {
+    try{
+      await Auth.confirmSignUp(data.username, data.code);
+      navigation.navigate('SignIn');
+    } catch(e){
+      Alert.alert("Oops", e.message);
+    }
   };
 
-  const onResendPress = () => {
-    console.warn('on terms of use pressed');
+  const onResendPress = async () => {
+    try{
+      await Auth.resendSignUp(username);
+      Alert.alert("Success", 'Code was resent to your email');
+    } catch(e){
+      Alert.alert("Oops", e.message);
+    }
   };
 
   const onSignInPress = () => {

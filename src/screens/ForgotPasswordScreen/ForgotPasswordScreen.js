@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert
 } from 'react-native';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/logo.png';
