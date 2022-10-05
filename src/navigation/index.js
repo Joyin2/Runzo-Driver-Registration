@@ -9,7 +9,7 @@ import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
-import {Auth} from 'aws-amplify';
+import {Auth, Hub} from 'aws-amplify';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +26,16 @@ const Navigation = () => {
   };
   useEffect(() => {
     checkUser();
+  }, []);
+
+  useEffect(()=>{
+    const listener = (data) => {
+      if (data.payload.event === 'signIn' || data.payload.event === 'signOut'){
+        checkUser();
+      }
+    }
+    Hub.listen('auth', listener);
+    return () => Hub.remove('auth', listener);
   }, []);
 
   if (user=== undefined){
