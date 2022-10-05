@@ -30,9 +30,6 @@ const ForgotPasswordScreen = () => {
     } catch(e){
       Alert.alert("Oops", e.message);
     }
-
-    // console.warn(data);
-    // navigation.navigate('NewPassword');
   };
 
   const onSignInPress = () => {

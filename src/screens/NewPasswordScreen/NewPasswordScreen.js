@@ -40,6 +40,14 @@ const NewPasswordScreen = () => {
         />
         <Text style={styles.title}>Reset your password</Text>
         <CustomInput
+          placeholder="Username"
+          name="username"
+          control={control}
+          rules={{
+            required: 'Username is required',
+          }}
+        />
+        <CustomInput
           placeholder="Code"
           name="code"
           control={control}
