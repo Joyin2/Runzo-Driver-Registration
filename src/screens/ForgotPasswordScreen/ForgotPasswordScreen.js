@@ -22,9 +22,17 @@ const ForgotPasswordScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
-  const onSendPressed = data => {
-    console.warn(data);
-    navigation.navigate('NewPassword');
+  const onSendPressed = async data => {
+    try{
+      await Auth.forgotPassword(data.username);
+      navigation.navigate('NewPassword');
+      Alert.alert("Success", 'Code was resent to your email');
+    } catch(e){
+      Alert.alert("Oops", e.message);
+    }
+
+    // console.warn(data);
+    // navigation.navigate('NewPassword');
   };
 
   const onSignInPress = () => {
